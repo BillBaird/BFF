@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Blazor" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+  <configuration default="false" name="Blazor.Server" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
     <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/samples/Blazor/Server/Blazor.Server.csproj" />
     <option name="LAUNCH_PROFILE_TFM" value="net5.0" />
     <option name="LAUNCH_PROFILE_NAME" value="Blazor.Server" />

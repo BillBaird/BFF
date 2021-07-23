@@ -32,12 +32,12 @@ namespace IdentityServerHost
                     
                     AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
 
-                    RedirectUris = { "https://localhost:5002/signin-oidc" },
+                    RedirectUris = { "https://192.168.1.6:5002/signin-oidc" },
                     
-                    //FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
-                    BackChannelLogoutUri = "https://localhost:5002/bff/backchannel",
+                    FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
+                    BackChannelLogoutUri = "https://192.168.1.6:5002/bff/backchannel",
                     
-                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://192.168.1.6:5002/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "api" }

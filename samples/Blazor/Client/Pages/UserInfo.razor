@@ -1,10 +1,8 @@
-﻿@page "/fetchdataCrossSite"
+@page "/userInfo"
 @using System.Text.Json
 @inject HttpClient Http
 
-<h3>Fetch Data (cross site)</h3>
-
-<p>This component demonstrates fetching data from the server.</p>
+<h3>UserInfo</h3>
 
 @if (data == null)
 {
@@ -33,7 +31,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await Http.GetAsync("api/foo");
+        var response = await Http.GetAsync("api/foo/userinfo");
         if (response.IsSuccessStatusCode)
         {
             var foo = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(await response.Content.ReadAsStringAsync());
@@ -44,5 +42,4 @@ else
             error = "Error contacting API: " + response.StatusCode.ToString();
         }
     }
-
 }

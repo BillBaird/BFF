@@ -42,7 +42,7 @@ namespace Blazor.Server
                 })
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = "https://localhost:5001";
+                    options.Authority = "https://identityserver.sweetbridge.com:19101";
                     
                     // confidential client using code flow + PKCE
                     options.ClientId = "spa";
@@ -58,6 +58,9 @@ namespace Blazor.Server
                     options.Scope.Clear();
                     options.Scope.Add("openid");
                     options.Scope.Add("profile");
+                    options.Scope.Add("email");     // Scopes need to be configured here as well as in IdentityServer ClientScopes.
+                                                        // If here, but not in ClientScopes, an "invalid_scope" error is returned.
+                                                        // The IdentityServer log will indicate that the client is not allowed to access the scope.
                     options.Scope.Add("api");
                     options.Scope.Add("offline_access");
                 });

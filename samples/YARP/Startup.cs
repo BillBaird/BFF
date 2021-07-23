@@ -108,7 +108,7 @@ namespace YarpHost
                 })
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = "https://localhost:5001";
+                    options.Authority = "https://identityserver.sweetbridge.com:19101";
 
                     // confidential client using code flow + PKCE
                     options.ClientId = "spa";

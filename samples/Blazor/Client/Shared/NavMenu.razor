@@ -27,6 +27,20 @@
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data (cross-site)
             </NavLink>
         </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="userInfo">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> UserInfo (cross-site)
+            </NavLink>
+        </li>
+        <AuthorizeView>
+            <Authorized>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="userInfo">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> UserInfo (authorized)
+                    </NavLink>
+                </li>
+            </Authorized>
+        </AuthorizeView>
     </ul>
 </div>
 

@@ -2,6 +2,7 @@
 // See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -17,14 +18,35 @@ namespace Api
         {
             Activity.DefaultIdFormat = ActivityIdFormat.W3C;
 
+            var logTheme = new AnsiConsoleTheme((IReadOnlyDictionary<ConsoleThemeStyle, string>) new Dictionary<ConsoleThemeStyle, string>()
+            {
+                [ConsoleThemeStyle.Text] = "\x001B[38;5;0232m",
+                [ConsoleThemeStyle.SecondaryText] = "\x001B[38;5;0m",
+                [ConsoleThemeStyle.TertiaryText] = "\x001B[38;5;2m",
+                [ConsoleThemeStyle.Invalid] = "\x001B[33;1m",
+                [ConsoleThemeStyle.Null] = "\x001B[38;5;0038m",
+                [ConsoleThemeStyle.Name] = "\x001B[38;5;4m",
+                [ConsoleThemeStyle.String] = "\x001B[38;5;9m",
+                [ConsoleThemeStyle.Number] = "\x001B[38;5;151m",
+                [ConsoleThemeStyle.Boolean] = "\x001B[38;5;0038m",
+                [ConsoleThemeStyle.Scalar] = "\x001B[38;5;0079m",
+                [ConsoleThemeStyle.LevelVerbose] = "\x001B[38;5;25m",
+                [ConsoleThemeStyle.LevelDebug] = "\x001B[38;5;21m",
+                [ConsoleThemeStyle.LevelInformation] = "\x001B[38;5;21;1m",
+                [ConsoleThemeStyle.LevelWarning] = "\x001B[38;5;0229m",
+                [ConsoleThemeStyle.LevelError] = "\x001B[38;5;0197m\x001B[48;5;0238m",
+                [ConsoleThemeStyle.LevelFatal] = "\x001B[38;5;0197m\x001B[48;5;0238m"
+            });
+            
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
                 .MinimumLevel.Override("System", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
+                .MinimumLevel.Override("Serilog.AspNetCore.RequestLoggingMiddleware", LogEventLevel.Verbose)
                 .Enrich.FromLogContext()
-                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
+                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss.ffff} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: logTheme)
                 .CreateLogger();
 
             try

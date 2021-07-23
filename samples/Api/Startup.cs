@@ -20,7 +20,7 @@ namespace Api
             services.AddAuthentication("token")
                 .AddJwtBearer("token", options =>
                 {
-                    options.Authority = "https://localhost:5001";
+                    options.Authority = "https://identityserver.sweetbridge.com:19101";
                     options.MapInboundClaims = false;
 
                     options.TokenValidationParameters = new TokenValidationParameters()
@@ -62,13 +62,13 @@ namespace Api
             }
 
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthentication(); // adds the authentication middleware to the pipeline so authentication will be performed automatically on every call into the host.
+            app.UseAuthorization();  // adds the authorization middleware to make sure, our API endpoint cannot be accessed by anonymous clients.
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers()
-                    .RequireAuthorization("ApiCaller");
+                    .RequireAuthorization("ApiCaller");      // This says that all API endpoints require the scope ApiCaller (policy)
             });
         }
     }
