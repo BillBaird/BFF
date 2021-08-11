@@ -4,6 +4,15 @@
 
 <h3>UserInfo</h3>
 
+<AuthorizeView>
+    <Authorized>
+        <p>User is currently authenticated, so this should work. Note that both cross-site and auth show up since the user is Authorized. See NavMenu.razor</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>User is currently not authenticated, so this should return a "Forbidden" error. Note that only the cross-site UserInfo menu item shows up as controlled by NavMenu.razor</p>
+    </NotAuthorized>
+</AuthorizeView>
+
 @if (data == null)
 {
     <p><em>Loading...</em></p>

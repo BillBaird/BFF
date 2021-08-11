@@ -2,6 +2,7 @@
 // See LICENSE in the project root for license information.
 
 using Duende.Bff;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -45,8 +46,8 @@ namespace Blazor.Server
                     options.Authority = "https://identityserver.sweetbridge.com:19101";
                     
                     // confidential client using code flow + PKCE
-                    options.ClientId = "spa";
-                    options.ClientSecret = "secret";
+                    options.ClientId = "duende.bff.fork.blazor.server";
+                    options.ClientSecret = "bffSecret";
                     options.ResponseType = "code";
                     options.ResponseMode = "query";
 
@@ -61,7 +62,15 @@ namespace Blazor.Server
                     options.Scope.Add("email");     // Scopes need to be configured here as well as in IdentityServer ClientScopes.
                                                         // If here, but not in ClientScopes, an "invalid_scope" error is returned.
                                                         // The IdentityServer log will indicate that the client is not allowed to access the scope.
-                    options.Scope.Add("api");
+                                                        
+                    options.Scope.Add("api");      // Need this to call either API (Fetch data - EchoController or UserInfo - UserInfoController)
+                    options.Scope.Add("kyc");
+                    options.ClaimActions.MapUniqueJsonKey("kyc_level (remapped as an example)", "kyc_status");      // Needed to see the kys_status claim
+                                                        // Note the the first parameter can be any name you want, such as kycLevel, key_status, etc.
+                                                        // If you don't map a value, it will not show up.
+                    options.Scope.Add("doc_server");
+                    options.ClaimActions.MapUniqueJsonKey("doc_role", "doc_role");      // Needed to see the kys_status claim
+                                                        
                     options.Scope.Add("offline_access");
                 });
         }

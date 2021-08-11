@@ -23,7 +23,11 @@ namespace Api
             else if (sub != null)
             {
                 var userName = User.FindFirst(("name"));
-                message = $"Hello user, {userName.Value}";
+                var client = User.FindFirst("client_id");
+                if (userName == null)
+                    message = $"Hello sub {sub.Value} in client {client.Value}";
+                else
+                    message = $"Hello user, {userName.Value} (sub {sub.Value}) in client {client.Value}";
             }
             else
             {
