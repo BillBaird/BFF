@@ -32,12 +32,12 @@ namespace IdentityServerHost
                     
                     AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
 
-                    RedirectUris = { "https://192.168.1.6:5002/signin-oidc" },
+                    RedirectUris = { "https://wlbaird.synology.me:5008/signin-oidc" },
                     
-                    FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
-                    BackChannelLogoutUri = "https://192.168.1.6:5002/bff/backchannel",
+                    FrontChannelLogoutUri = "https://wlbaird.synology.me:5008/signout-oidc",
+                    BackChannelLogoutUri = "https://wlbaird.synology.me:5008/bff/backchannel",
                     
-                    PostLogoutRedirectUris = { "https://192.168.1.6:5002/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://wlbaird.synology.me:5008/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "api" }
